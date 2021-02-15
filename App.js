@@ -1,27 +1,60 @@
-import * as React from "react";
+import React, { Component } from "react";
 import { View, Text } from "react-native";
 import * as helpers from "./utils/helpers";
 
-export default function App() {
-  const temp = "Omar";
-  const test = helpers.saveDeckTitle(temp);
-  const card = {
-    question: "3p?",
-    answer: "A h 3o",
+class App extends Component {
+  state = {
+    omar: "zy mana 😂😂",
   };
+  componentDidMount() {
+    helpers.setStorage();
+  }
 
-  helpers.addCardToDeck(temp, card);
+  // toggleme = () => {
+  
+  //   helpers.saveDeckTitle("omar")
+  //   const card = {
+  //     question: "hobba?",
+  //     answer: "test",
+  //   };
 
-  console.log(helpers.getDecks());
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Hello React Native !</Text>
-    </View>
-  );
+  //   helpers.addCardToDeck("omar", card).then(() => {
+  //     helpers.getDecks().then((decks) => {
+  //       const data = JSON.parse(decks);
+  //       console.log(data);
+  //     });
+  //   });
+
+    
+  // }
+
+  render() {
+
+    helpers.saveDeckTitle("omar")
+    const card = {
+      question: "hobba?",
+      answer: "test",
+    };
+
+    helpers.addCardToDeck("omar", card).then(() => {
+      helpers.getDecks().then((decks) => {
+        const data = JSON.parse(decks);
+        console.log(data["omar"]);
+      });
+    });
+    
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text>ooo</Text>
+      </View>
+    );
+  }
 }
+
+export default App;

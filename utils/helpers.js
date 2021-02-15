@@ -1,4 +1,6 @@
-let decks = {
+import { AsyncStorage } from "react-native";
+
+let Decks = {
   React: {
     title: "React",
     questions: [
@@ -24,26 +26,49 @@ let decks = {
   },
 };
 
+export const DECKS_KEY = "decks";
+
+export function setStorage() {
+  AsyncStorage.setItem(DECKS_KEY, JSON.stringify(Decks));
+}
+
 export function getDecks() {
-  return decks;
+  return AsyncStorage.getItem(DECKS_KEY);
 }
 
 export function getDeck(id) {
-  return decks[id];
+  return AsyncStorage.getItem(DECKS_KEY).then((decks) => {
+    const data = JSON.parse(decks);
+    return data[id];
+  });
 }
 
 export function saveDeckTitle(title) {
-  decks[title] = {
-    title,
-    questions: [],
-  };
+  return AsyncStorage.mergeItem(
+    DECKS_KEY,
+    JSON.stringify({
+      [title]: {
+        title,
+        questions: [],
+      },
+    })
+  );
 }
 
 export function addCardToDeck(title, card) {
-  decks[title].questions.push(card);
+  return AsyncStorage.getItem(DECKS_KEY).then((decks) => {
+    const data = JSON.parse(decks);
+    const newDecks = {
+      ...data,
+      [title]: {
+        questions: [...data[title].questions, card],
+      },
+    };
+    AsyncStorage.mergeItem(
+      DECKS_KEY,
+      JSON.stringify({
+        newDecks,
+      })
+    );
+  });
 }
-
-
-
-
-
