@@ -23,14 +23,10 @@ class App extends Component {
         console.log("the data is :");
         console.log(data);
       });
-      
-
-
   }
 
   fun = () => {
     //show decks initially
-    
 
     helpers
       .saveDeckTitle("omar")

@@ -8,7 +8,16 @@ class App extends Component {
   };
 
   componentDidMount() {
-    helpers.setStorage();
+    const card = {
+      question: "hobba?",
+      answer: "test",
+    };
+
+    helpers
+      .setStorage()
+      .then(() => helpers.getDecks())
+      .then((decks)=> console.log(decks));
+      
   }
 
  
