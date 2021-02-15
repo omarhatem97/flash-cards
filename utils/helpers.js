@@ -29,7 +29,17 @@ let Decks = {
 export const DECKS_KEY = "decks";
 
 export function setStorage() {
-  AsyncStorage.setItem(DECKS_KEY, JSON.stringify(Decks));
+  return AsyncStorage.setItem(DECKS_KEY, JSON.stringify(Decks));
+}
+
+export function askShi() {
+  return AsyncStorage.getAllKeys().then((keys) => console.log(keys));
+}
+
+export function resetStorage() {
+  AsyncStorage.setItem(DECKS_KEY, JSON.stringify({})).then(() =>
+    console.log("reseted")
+  );
 }
 
 export function getDecks() {
@@ -64,11 +74,12 @@ export function addCardToDeck(title, card) {
         questions: [...data[title].questions, card],
       },
     };
+    console.log(newDecks);
     AsyncStorage.mergeItem(
       DECKS_KEY,
-      JSON.stringify({
+      JSON.stringify(
         newDecks,
-      })
+      )
     );
   });
 }
