@@ -8,44 +8,12 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const card = {
-      question: "hobba?",
-      answer: "test",
-    };
-
-    helpers
-      .setStorage()
-      .then(() => helpers.saveDeckTitle("omar"))
-      .then(() => helpers.addCardToDeck("omar", card))
-      .then(() => helpers.getDecks())
-      .then((decks) => {
-        const data = JSON.parse(decks);
-        console.log("the data is :");
-        console.log(data);
-      });
-      
-
-
+    helpers.setStorage();
   }
 
-  fun = () => {
-    //show decks initially
-    
-
-    helpers
-      .saveDeckTitle("omar")
-      .then(() => helpers.addCardToDeck("omar", card))
-      .then(() => helpers.getDecks())
-      .then((decks) => {
-        const data = JSON.parse(decks);
-        console.log("the data is :");
-        console.log(data);
-      });
-  };
+ 
 
   render() {
-    this.fun();
-
     return (
       <View
         style={{

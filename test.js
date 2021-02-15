@@ -6,40 +6,45 @@ class App extends Component {
   state = {
     omar: "zy mana 😂😂",
   };
+
   componentDidMount() {
-    helpers.setStorage();
-  }
-
-  // toggleme = () => {
-
-  //   helpers.saveDeckTitle("omar")
-  //   const card = {
-  //     question: "hobba?",
-  //     answer: "test",
-  //   };
-
-  //   helpers.addCardToDeck("omar", card).then(() => {
-  //     helpers.getDecks().then((decks) => {
-  //       const data = JSON.parse(decks);
-  //       console.log(data);
-  //     });
-  //   });
-
-  // }
-
-  render() {
-    helpers.saveDeckTitle("omar");
     const card = {
       question: "hobba?",
       answer: "test",
     };
 
-    helpers.addCardToDeck("omar", card).then(() => {
-      helpers.getDecks().then((decks) => {
+    helpers
+      .setStorage()
+      .then(() => helpers.saveDeckTitle("omar"))
+      .then(() => helpers.addCardToDeck("omar", card))
+      .then(() => helpers.getDecks())
+      .then((decks) => {
         const data = JSON.parse(decks);
+        console.log("the data is :");
         console.log(data);
       });
-    });
+      
+
+
+  }
+
+  fun = () => {
+    //show decks initially
+    
+
+    helpers
+      .saveDeckTitle("omar")
+      .then(() => helpers.addCardToDeck("omar", card))
+      .then(() => helpers.getDecks())
+      .then((decks) => {
+        const data = JSON.parse(decks);
+        console.log("the data is :");
+        console.log(data);
+      });
+  };
+
+  render() {
+    this.fun();
 
     return (
       <View
