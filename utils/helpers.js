@@ -1,4 +1,4 @@
-import { AsyncStorage } from "react-native";
+import { AsyncStorage } from "react-native"
 
 let Decks = {
   React: {
@@ -32,9 +32,7 @@ export function setStorage() {
   return AsyncStorage.setItem(DECKS_KEY, JSON.stringify(Decks));
 }
 
-export function askShi() {
-  return AsyncStorage.getAllKeys().then((keys) => console.log(keys));
-}
+
 
 export function resetStorage() {
   AsyncStorage.setItem(DECKS_KEY, JSON.stringify({})).then(() =>
