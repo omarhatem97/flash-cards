@@ -18,7 +18,7 @@ export function receiveDecks(decks) {
 
 export function handleReceiveDecks() {
   return (dispatch) => {
-    getDecks().then((decks) => dispatch(receiveDecks(decks)));
+    return getDecks().then((decks) => dispatch(receiveDecks(decks)));
   };
 }
 
