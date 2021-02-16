@@ -35,7 +35,7 @@ class DecksList extends React.Component {
           </View>
         ) : (
           <View>
-            {this.state.titles.map((title) => (
+            {this.props.titles.map((title) => (
               <Deck
                 key={title}
                 deckTitle={title}
@@ -89,4 +89,5 @@ const styles = StyleSheet.create({
     color: color.red,
     fontSize: 18,
   },
+  centre: { flex: 1, justifyContent: "center", alignItems: "center" },
 });

@@ -8,8 +8,23 @@ import thunk from "redux-thunk";
 import Tabs from "./components/Tabs";
 import Constants from "expo-constants";
 import { connect } from "react-redux";
+import * as color from "./utils/colors";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
 const store = createStore(reducer, applyMiddleware(thunk));
+const Stack = createStackNavigator();
+
+const StatusBar = () => {
+  return (
+    <View
+      style={{
+        height: Constants.statusBarHeight,
+        backgroundColor: color.blue,
+      }}
+    />
+  );
+};
 
 class App extends Component {
   componentDidMount() {
@@ -25,8 +40,12 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={{ height: Constants.statusBarHeight }} />
-        <Tabs />
+        <StatusBar />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={Tabs} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     );
   }

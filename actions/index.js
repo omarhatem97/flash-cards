@@ -31,7 +31,7 @@ export function addDeck(title) {
 
 export function handleAddDeck(title) {
   return (dispatch) => {
-    saveDeckTitle(title).then(() => dispatch(addDeck(title)));
+    return saveDeckTitle(title).then(() => dispatch(addDeck(title)));
   };
 }
 
