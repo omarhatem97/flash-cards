@@ -6,8 +6,8 @@ import {
 } from "../utils/helpers";
 
 export const RECEIVE_DECKS = "RECEIVE_DECKS";
-export const ADD_DECK      = "ADD_DECK";
-export const ADD_CARD      = "ADD_CARD";
+export const ADD_DECK = "ADD_DECK";
+export const ADD_CARD = "ADD_CARD";
 
 export function receiveDecks(decks) {
   return {
@@ -45,6 +45,8 @@ export function addCard(title, card) {
 
 export function handleAddCard(title, card) {
   return (dispatch) => {
-    addCard(title, card).then(() => dispatch(addCard(title, card)));
+    return addCardToDeck(title, card).then(() =>
+      dispatch(addCard(title, card))
+    );
   };
 }

@@ -11,6 +11,8 @@ import { connect } from "react-redux";
 import * as color from "./utils/colors";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import DeckDetails from './components/DeckDetails'
+import AddCard from './components/AddCard'
 
 const store = createStore(reducer, applyMiddleware(thunk));
 const Stack = createStackNavigator();
@@ -44,6 +46,8 @@ class App extends Component {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="Home" component={Tabs} />
+            <Stack.Screen name="Deck" component={DeckDetails} />
+            <Stack.Screen name="Add Card" component={AddCard} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

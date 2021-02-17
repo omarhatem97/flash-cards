@@ -1,18 +1,11 @@
-import * as React from "react";
+import React, { Component } from "react";
 import Deck from "./Deck";
 import * as color from "../utils/colors";
 import { connect } from "react-redux";
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  Text,
-  StatusBar,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { handleReceiveDecks } from "../actions/index";
 
-class DecksList extends React.Component {
+class DecksList extends Component {
   state = {
     titles: [],
   };
@@ -40,6 +33,7 @@ class DecksList extends React.Component {
                 key={title}
                 deckTitle={title}
                 numCards={decks[title].questions.length}
+                navigation={this.props.navigation}
               />
             ))}
           </View>
