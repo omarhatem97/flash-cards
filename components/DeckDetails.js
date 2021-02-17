@@ -12,7 +12,11 @@ class DeckDetails extends Component {
     });
   };
 
-  hadleAnswerButton = () => {};
+  hadleAnswerButton = () => {
+    this.props.navigation.navigate("Quiz", {
+        title: this.props.route.params.title,
+      });
+  };
 
   hadleAddCard = () => {
     this.props.navigation.navigate("Add Card", {

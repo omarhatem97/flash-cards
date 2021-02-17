@@ -22,6 +22,10 @@ class AddCard extends Component {
 
   handleSubmit = () => {
     //dispatch save deck title
+    if(this.state.question === "" || this.state.answer === ""){
+        alert("please fill up correctly !")
+        return;
+    }
     const card = {
       question: this.state.question,
       answer: this.state.answer,

@@ -11,8 +11,10 @@ import { connect } from "react-redux";
 import * as color from "./utils/colors";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import DeckDetails from './components/DeckDetails'
-import AddCard from './components/AddCard'
+import DeckDetails from "./components/DeckDetails";
+import AddCard from "./components/AddCard";
+import Quiz from "./components/Quiz";
+import Result from "./components/Result";
 
 const store = createStore(reducer, applyMiddleware(thunk));
 const Stack = createStackNavigator();
@@ -30,13 +32,8 @@ const StatusBar = () => {
 
 class App extends Component {
   componentDidMount() {
-    const card = {
-      question: "hobba?",
-      answer: "test",
-    };
-
     helpers.setStorage().then(() => helpers.getDecks());
-    // .then((decks) => console.log(decks));
+    helpers.setLocalNotification();
   }
 
   render() {
@@ -48,6 +45,8 @@ class App extends Component {
             <Stack.Screen name="Home" component={Tabs} />
             <Stack.Screen name="Deck" component={DeckDetails} />
             <Stack.Screen name="Add Card" component={AddCard} />
+            <Stack.Screen name="Quiz" component={Quiz} />
+            <Stack.Screen name="Result" component={Result} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

@@ -1,4 +1,7 @@
 import { AsyncStorage } from "react-native";
+import { Notifications } from "expo";
+import {Permissions} from 'expo-permissions'
+
 
 let Decks = {
   React: {
@@ -27,6 +30,7 @@ let Decks = {
 };
 
 export const DECKS_KEY = "decks";
+export const NOTIFICATION_KEY = "notification"
 
 export function setStorage() {
   return AsyncStorage.setItem(DECKS_KEY, JSON.stringify(Decks));
@@ -75,4 +79,52 @@ export function addCardToDeck(title, card) {
     console.log(newDecks);
     AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(newDecks));
   });
+}
+
+export function clearLocalNotification() {
+  return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
+    Notifications.cancelAllScheduledNotificationsAsync
+  );
+}
+
+function createNotification() {
+  return {
+    title: "Take a quiz!",
+    body: "👋 don't forget to take a quiz today!",
+    ios: {
+      sound: true,
+    },
+    android: {
+      sound: true,
+      priority: "high",
+      sticky: false,
+      vibrate: true,
+    },
+  };
+}
+
+export function setLocalNotification() {
+  AsyncStorage.getItem(NOTIFICATION_KEY)
+    .then(JSON.parse)
+    .then((data) => {
+      if (data === null) {
+        Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
+          if (status === "granted") {
+            Notifications.cancelAllScheduledNotificationsAsync();
+
+            let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate());
+            tomorrow.setHours(8);
+            tomorrow.setMinutes(0);
+
+            Notifications.scheduleLocalNotificationAsync(createNotification(), {
+              time: tomorrow,
+              repeat: "day",
+            });
+
+            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+          }
+        });
+      }
+    });
 }
