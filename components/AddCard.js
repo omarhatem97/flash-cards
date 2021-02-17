@@ -51,7 +51,6 @@ class AddCard extends Component {
             style={styles.input}
             underlineColorAndroid="transparent"
             placeholder=" Add a Question"
-            placeholderTextColor="#9a73ef"
             autoCapitalize="none"
             onChangeText={this.handlequestion}
             value={this.state.question}
@@ -60,14 +59,13 @@ class AddCard extends Component {
             style={styles.input}
             underlineColorAndroid="transparent"
             placeholder=" Add Answer"
-            placeholderTextColor="#9a73ef"
             autoCapitalize="none"
             onChangeText={this.handleAnswer}
             value={this.state.answer}
           />
 
           <TouchableOpacity
-            style={styles.submitButton}
+            style={styles.button}
             onPress={this.handleSubmit}
           >
             <Text style={styles.submitButtonText}> Submit </Text>
@@ -92,8 +90,9 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     height: 40,
-    borderColor: "#7a42f4",
     borderWidth: 1,
+    paddingLeft:16,
+    paddingRight:16
   },
   submitButton: {
     backgroundColor: "#7a42f4",
@@ -103,5 +102,27 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: "white",
+  },
+  buttonContainer: {
+    margin:32,
+    flexDirection:"column" ,
+    justifyContent: "flex-end",
+    alignContent:"flex-end",
+    padding:32,
+    borderRadius: 8,
+  },
+  button: {
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOpacity: 1,
+    elevation: 3,
+    backgroundColor: "#032449",
+    marginTop: 40,
   },
 });

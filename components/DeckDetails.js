@@ -14,8 +14,8 @@ class DeckDetails extends Component {
 
   hadleAnswerButton = () => {
     this.props.navigation.navigate("Quiz", {
-        title: this.props.route.params.title,
-      });
+      title: this.props.route.params.title,
+    });
   };
 
   hadleAddCard = () => {
@@ -28,15 +28,17 @@ class DeckDetails extends Component {
     const { title, numCards } = this.props.route.params;
     this.setTitle(title);
     return (
-      <View>
-        <Text>{title}</Text>
-        <Text>{numCards} cards</Text>
-        <TouchableOpacity onPress={this.hadleAddCard}>
-          <Text>Add Card</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.hadleAnswerButton}>
-          <Text>Answer Quiz</Text>
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <Text style={styles.header}>{title}</Text>
+        <Text style={styles.numCards}>{numCards} cards</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={this.hadleAddCard}>
+            <Text style={{color:color.white}}>Add Card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={this.hadleAnswerButton}>
+            <Text style={{color:color.white}}>Answer Quiz</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -47,28 +49,38 @@ export default DeckDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    backgroundColor: color.green,
   },
 
-  card: {
-    marginLeft: 32,
-    marginRight: 32,
-    marginTop: 32,
-    marginBottom: 16,
-    backgroundColor: color.white,
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  cardTitle: {
-    padding: 16,
+  header: {
+    fontSize: 32,
     textAlign: "center",
-    fontSize: 22,
+    padding: 32,
   },
-
   numCards: {
-    paddingBottom: 16,
     textAlign: "center",
-    fontSize: 12,
+    fontSize: 18,
   },
+  buttonContainer: {
+    margin:32,
+    flexDirection:"column" ,
+    justifyContent: "flex-end",
+    alignContent:"flex-end",
+    padding:32,
+    borderRadius: 8,
+  },
+  button: {
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOpacity: 1,
+    elevation: 3,
+    backgroundColor: "#032449",
+    marginTop: 40,
+  },
+
 });

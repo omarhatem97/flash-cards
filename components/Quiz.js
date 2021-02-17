@@ -10,7 +10,7 @@ import QuizCard from "./QuizCard";
 
 function ShowAnswer(props) {
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.answer}>{props.answer}</Text>
       <TouchableOpacity
         style={styles.showQuestion}
@@ -107,7 +107,9 @@ class Quiz extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>{`${this.state.idx + 1}/ ${content.length}  `}</Text>
+        <Text style={styles.qn}>{`${this.state.idx + 1}/ ${
+          content.length
+        }  `}</Text>
         {this.state.showAnswer === true ? (
           <ShowAnswer
             answer={content[idx].answer}
@@ -121,12 +123,19 @@ class Quiz extends Component {
             </TouchableOpacity>
           </View>
         )}
-        <View style={styles.butmargin}>
-          <TouchableOpacity key="correct" onPress={this.handleCorrectBut}>
-            <Text style={styles.showAnswer}>Correct</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.correctButton}
+            key="correct"
+            onPress={this.handleCorrectBut}
+          >
+            <Text style={{ color: color.white }}>Correct</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.handleInCorrectBut}>
-            <Text style={styles.showAnswer}>Incorrect</Text>
+          <TouchableOpacity
+            style={styles.wrongButton}
+            onPress={this.handleInCorrectBut}
+          >
+            <Text style={{ color: color.white }}>Incorrect</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -150,10 +159,13 @@ export default connect(mapStateToProps)(Quiz);
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 23,
-    justifyContent: "space-around",
-    alignContent: "center",
-    alignItems: "center",
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: color.grey,
+  },
+  qn: {
+    textAlign: "center",
+    margin: 16,
   },
   header: {
     fontSize: 24,
@@ -192,5 +204,56 @@ const styles = StyleSheet.create({
   answer: {
     fontSize: 22,
     margin: 16,
+    textAlign: "center",
+  },
+  buttonContainer: {
+    margin: 32,
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignContent: "flex-end",
+    padding: 32,
+    borderRadius: 8,
+  },
+  button: {
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOpacity: 1,
+    elevation: 3,
+    backgroundColor: "#032449",
+    marginTop: 40,
+  },
+  correctButton: {
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOpacity: 1,
+    elevation: 3,
+    backgroundColor: color.green,
+    marginTop: 40,
+  },
+  wrongButton: {
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOpacity: 1,
+    elevation: 3,
+    backgroundColor: color.red,
+    marginTop: 40,
   },
 });

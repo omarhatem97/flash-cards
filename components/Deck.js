@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     justifyContent: "center",
     alignContent: "center",
+    borderRadius:8,
   },
   cardTitle: {
     padding: 16,
