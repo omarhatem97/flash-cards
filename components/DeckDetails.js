@@ -11,7 +11,6 @@ class DeckDetails extends Component {
       title: title,
     });
   };
-
   hadleAnswerButton = () => {
     this.props.navigation.navigate("Quiz", {
       title: this.props.route.params.title,
@@ -29,14 +28,20 @@ class DeckDetails extends Component {
     this.setTitle(title);
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>{title}</Text>
+        <Text style={styles.header}>📜 {title}</Text>
         <Text style={styles.numCards}>{numCards} cards</Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={this.hadleAddCard}>
-            <Text style={{color:color.white}}>Add Card</Text>
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: color.green }]}
+            onPress={this.hadleAddCard}
+          >
+            <Text style={{ color: color.white }}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.hadleAnswerButton}>
-            <Text style={{color:color.white}}>Answer Quiz</Text>
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: color.red }]}
+            onPress={this.hadleAnswerButton}
+          >
+            <Text style={{ color: color.white }}>Answer Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -61,11 +66,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   buttonContainer: {
-    margin:32,
-    flexDirection:"column" ,
+    margin: 32,
+    flexDirection: "column",
     justifyContent: "flex-end",
-    alignContent:"flex-end",
-    padding:32,
+    alignContent: "flex-end",
+    padding: 32,
     borderRadius: 8,
   },
   button: {
@@ -82,5 +87,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#032449",
     marginTop: 40,
   },
-
 });

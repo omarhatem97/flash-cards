@@ -7,6 +7,7 @@ import { TextInput, TouchableOpacity } from "react-native";
 import { handleAddDeck } from "../actions/index";
 import { handleAddCard } from "../actions/index";
 import QuizCard from "./QuizCard";
+import * as helpers from "../utils/helpers";
 
 function ShowAnswer(props) {
   return (
@@ -61,6 +62,8 @@ class Quiz extends Component {
 
     if (this.state.idx + 1 > content.length - 1) {
       this.resetState();
+      helpers.clearLocalNotification().then(helpers.setLocalNotification);
+
       this.props.navigation.navigate("Result", {
         numCorrect: this.state.numCorrect + 1,
         total: this.props.content.length,
@@ -73,10 +76,6 @@ class Quiz extends Component {
     }
   };
 
-  //   shouldComponentUpdate(){
-  //       this.state.idx > this.props.content.length -1
-  //   }
-
   handleInCorrectBut = () => {
     const { deck, content } = this.props;
     const value =
@@ -86,6 +85,7 @@ class Quiz extends Component {
 
     if (this.state.idx + 1 > content.length - 1) {
       this.resetState();
+      helpers.clearLocalNotification().then(helpers.setLocalNotification);
       this.props.navigation.navigate("Result", {
         numCorrect: this.state.numCorrect,
         total: this.props.content.length,

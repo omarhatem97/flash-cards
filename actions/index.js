@@ -1,9 +1,4 @@
-import {
-  getDecks,
-  getDeck,
-  saveDeckTitle,
-  addCardToDeck,
-} from "../utils/helpers";
+import { addCardToDeck, getDecks, saveDeckTitle } from "../utils/helpers";
 
 export const RECEIVE_DECKS = "RECEIVE_DECKS";
 export const ADD_DECK = "ADD_DECK";

@@ -76,7 +76,7 @@ export function addCardToDeck(title, card) {
         questions: [...data[title].questions, card],
       },
     };
-    console.log(newDecks);
+    // console.log(newDecks);
     AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(newDecks));
   });
 }

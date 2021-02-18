@@ -24,7 +24,7 @@ const StatusBar = () => {
     <View
       style={{
         height: Constants.statusBarHeight,
-        backgroundColor: color.blue,
+        backgroundColor: "#005005",
       }}
     />
   );
@@ -42,7 +42,14 @@ class App extends Component {
         <StatusBar />
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Home" component={Tabs} />
+            <Stack.Screen
+              name="Home"
+              component={Tabs}
+              options={{
+                headerTintColor: "white",
+                headerStyle: { backgroundColor: "#2e7d32" },
+              }}
+            />
             <Stack.Screen name="Deck" component={DeckDetails} />
             <Stack.Screen name="Add Card" component={AddCard} />
             <Stack.Screen name="Quiz" component={Quiz} />

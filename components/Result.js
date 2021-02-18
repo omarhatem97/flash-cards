@@ -32,7 +32,7 @@ class Result extends Component {
         const{numCorrect, title, total} = this.props.route.params;
         return ( 
             <View style={styles.container}>
-                <Text style= {styles.header}>Quiz Complelte!</Text>
+                <Text style= {styles.header}>📜 Quiz Complete! 👏</Text>
                 <Text style={[styles.header, {color:color.red}]}>{`${numCorrect}/${total}`} correct</Text>
                 <TouchableOpacity style={styles.correctButton} onPress= {this.handleRestartQuiz}>
                     <Text style={{color:color.white}}>Restart Quiz</Text>
