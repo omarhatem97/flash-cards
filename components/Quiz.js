@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import Deck from "./Deck";
-import * as color from "../utils/colors";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { connect } from "react-redux";
-import { View, StyleSheet, Text, KeyboardAvoidingView } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native";
-import { handleAddDeck } from "../actions/index";
-import { handleAddCard } from "../actions/index";
-import QuizCard from "./QuizCard";
+import * as color from "../utils/colors";
 import * as helpers from "../utils/helpers";
+import QuizCard from "./QuizCard";
 
 function ShowAnswer(props) {
   return (
@@ -39,9 +35,7 @@ class Quiz extends Component {
   };
 
   handleShowAnswer = () => {
-    console.log(this.state);
     this.setState({ showAnswer: !this.state.showAnswer });
-    console.log(this.state);
   };
 
   resetState = () => {
@@ -53,7 +47,6 @@ class Quiz extends Component {
   };
 
   handleCorrectBut = () => {
-    console.log(this.key);
     const { deck, content } = this.props;
     const value =
       this.state.idx + 1 > content.length - 1
@@ -146,7 +139,6 @@ class Quiz extends Component {
 function mapStateToProps(decks, { route }) {
   const title = route.params.title;
   const deck = decks[title];
-  console.log(deck);
   const content = deck.questions; //array
 
   return {

@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import Deck from "./Deck";
-import * as color from "../utils/colors";
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { connect } from "react-redux";
-import { View, StyleSheet, Text, KeyboardAvoidingView } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native";
-import { handleAddDeck } from "../actions/index";
-import {handleAddCard} from "../actions/index";
+import { handleAddCard } from "../actions/index";
+import * as color from "../utils/colors";
 
 class AddCard extends Component {
   state = {
@@ -22,24 +26,21 @@ class AddCard extends Component {
 
   handleSubmit = () => {
     //dispatch save deck title
-    if(this.state.question === "" || this.state.answer === ""){
-        alert("please fill up correctly !")
-        return;
+    if (this.state.question === "" || this.state.answer === "") {
+      alert("please fill up correctly !");
+      return;
     }
     const card = {
       question: this.state.question,
       answer: this.state.answer,
     };
     const title = this.props.route.params.title;
-    console.log(card);
-    console.log(title);
-    this.props
-      .dispatch(handleAddCard(title, card))
-      .then(() => {
-          alert('Card has been added succefully!');
-          this.setState({question:""});
-          this.setState({answer:""});
-        })
+
+    this.props.dispatch(handleAddCard(title, card)).then(() => {
+      alert("Card has been added succefully!");
+      this.setState({ question: "" });
+      this.setState({ answer: "" });
+    });
   };
 
   render() {
@@ -64,10 +65,7 @@ class AddCard extends Component {
             value={this.state.answer}
           />
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.handleSubmit}
-          >
+          <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
             <Text style={styles.submitButtonText}> Submit </Text>
           </TouchableOpacity>
         </View>
@@ -91,8 +89,8 @@ const styles = StyleSheet.create({
     margin: 15,
     height: 40,
     borderWidth: 1,
-    paddingLeft:16,
-    paddingRight:16
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   submitButton: {
     backgroundColor: "#7a42f4",
@@ -104,11 +102,11 @@ const styles = StyleSheet.create({
     color: "white",
   },
   buttonContainer: {
-    margin:32,
-    flexDirection:"column" ,
+    margin: 32,
+    flexDirection: "column",
     justifyContent: "flex-end",
-    alignContent:"flex-end",
-    padding:32,
+    alignContent: "flex-end",
+    padding: 32,
     borderRadius: 8,
   },
   button: {

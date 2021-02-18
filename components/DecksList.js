@@ -4,7 +4,7 @@ import * as color from "../utils/colors";
 import { connect } from "react-redux";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { handleReceiveDecks } from "../actions/index";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 class DecksList extends Component {
   state = {
@@ -21,10 +21,14 @@ class DecksList extends Component {
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.header}>Welcome To Mobile Flash Cards!</Text>
-        <View style={{alignItems:"center", justifyContent:"center"}}>
-        <MaterialCommunityIcons name="cards-outline" size={32} color="green" />
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <MaterialCommunityIcons
+            name="cards-outline"
+            size={32}
+            color="green"
+          />
         </View>
-        
+
         {this.state.titles.length === 0 ? (
           <View style={styles.centered}>
             <Text style={styles.noCards}>

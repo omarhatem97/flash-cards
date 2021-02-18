@@ -1,7 +1,6 @@
 import { AsyncStorage } from "react-native";
 import { Notifications } from "expo";
-import {Permissions} from 'expo-permissions'
-
+import { Permissions } from "expo-permissions";
 
 let Decks = {
   React: {
@@ -30,7 +29,7 @@ let Decks = {
 };
 
 export const DECKS_KEY = "decks";
-export const NOTIFICATION_KEY = "notification"
+export const NOTIFICATION_KEY = "notification";
 
 export function setStorage() {
   return AsyncStorage.setItem(DECKS_KEY, JSON.stringify(Decks));
@@ -76,7 +75,7 @@ export function addCardToDeck(title, card) {
         questions: [...data[title].questions, card],
       },
     };
-    // console.log(newDecks);
+
     AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(newDecks));
   });
 }

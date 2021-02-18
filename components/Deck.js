@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as color from "../utils/colors";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
 class Deck extends Component {
   handlePress = () => {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     justifyContent: "center",
     alignContent: "center",
-    borderRadius:8,
+    borderRadius: 8,
   },
   cardTitle: {
     padding: 16,

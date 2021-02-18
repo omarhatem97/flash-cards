@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import * as color from "../utils/colors";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 
 class DeckDetails extends Component {
-  state = {};
-
   setTitle = (title) => {
     if (!title) return;
     this.props.navigation.setOptions({
@@ -12,9 +11,16 @@ class DeckDetails extends Component {
     });
   };
   hadleAnswerButton = () => {
-    this.props.navigation.navigate("Quiz", {
-      title: this.props.route.params.title,
-    });
+    //check if there is any card
+    const title = this.props.route.params.title;
+    console.log(this.props.route.params.title);
+    if (this.props.decks[title].questions.length > 0) {
+      this.props.navigation.navigate("Quiz", {
+        title: title,
+      });
+    } else {
+      alert("Please Add Cards First!");
+    }
   };
 
   hadleAddCard = () => {
@@ -24,12 +30,12 @@ class DeckDetails extends Component {
   };
 
   render() {
-    const { title, numCards } = this.props.route.params;
+    const { title } = this.props.route.params;
     this.setTitle(title);
     return (
       <View style={styles.container}>
         <Text style={styles.header}>📜 {title}</Text>
-        <Text style={styles.numCards}>{numCards} cards</Text>
+        <Text style={styles.numCards}>{this.props.numCards} cards</Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={[styles.button, { backgroundColor: color.green }]}
@@ -49,7 +55,16 @@ class DeckDetails extends Component {
   }
 }
 
-export default DeckDetails;
+function mapStateToProps(decks, { route }) {
+  const title = route.params.title;
+  const numCards = decks[title].questions.length;
+  return {
+    decks,
+    numCards,
+  };
+}
+
+export default connect(mapStateToProps)(DeckDetails);
 
 const styles = StyleSheet.create({
   container: {

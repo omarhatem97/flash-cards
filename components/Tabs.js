@@ -1,14 +1,9 @@
-import * as React from "react";
-import { Text, View, SafeAreaView, ColorPropType } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import DecksList from "./DecksList";
-import AddDeck from "./AddDeck";
-// import { color } from "react-native-reanimated";
+import * as React from "react";
 import * as color from "../utils/colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TabBarItem } from "react-native-tab-view";
-import { Ionicons } from '@expo/vector-icons';
+import AddDeck from "./AddDeck";
+import DecksList from "./DecksList";
 
 const Tab = createMaterialTopTabNavigator();
 
