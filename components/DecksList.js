@@ -7,14 +7,9 @@ import { handleReceiveDecks } from "../actions/index";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 class DecksList extends Component {
-  state = {
-    titles: [],
-  };
-
+  
   componentDidMount() {
-    this.props
-      .dispatch(handleReceiveDecks())
-      .then(() => this.setState({ titles: this.props.titles }));
+    this.props.dispatch(handleReceiveDecks());
   }
   render() {
     const { titles, numCards, decks } = this.props;
@@ -29,7 +24,7 @@ class DecksList extends Component {
           />
         </View>
 
-        {this.state.titles.length === 0 ? (
+        {this.props.titles.length === 0 ? (
           <View style={styles.centered}>
             <Text style={styles.noCards}>
               There Are No Decks, start adding some !

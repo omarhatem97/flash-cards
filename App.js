@@ -30,7 +30,7 @@ const StatusBar = () => {
 
 class App extends Component {
   componentDidMount() {
-    helpers.setStorage().then(() => helpers.getDecks());
+    helpers.getDecks();
     helpers.setLocalNotification();
   }
 
