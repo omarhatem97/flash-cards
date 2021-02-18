@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native";
-import { Notifications } from "expo";
+import * as Notifications from "expo-notifications";
 import { Permissions } from "expo-permissions";
+
 
 let Decks = {
   React: {
@@ -36,9 +37,8 @@ export function setStorage() {
 }
 
 export function resetStorage() {
-  AsyncStorage.setItem(DECKS_KEY, JSON.stringify({})).then(() =>
-    console.log("reseted")
-  );
+  AsyncStorage.setItem(DECKS_KEY, JSON.stringify({}));
+  return AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify({}));
 }
 
 export function getDecks() {
@@ -90,9 +90,7 @@ function createNotification() {
   return {
     title: "Take a quiz!",
     body: "👋 don't forget to take a quiz today!",
-    ios: {
-      sound: true,
-    },
+
     android: {
       sound: true,
       priority: "high",
@@ -102,28 +100,109 @@ function createNotification() {
   };
 }
 
+// export function setLocalNotification() {
+//   AsyncStorage.getItem(NOTIFICATION_KEY)
+//     .then(JSON.parse)
+//     .then((data) => {
+//       if (data === null) {
+//         Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
+//           if (status === "granted") {
+//             Notifications.cancelAllScheduledNotificationsAsync();
+
+//             let tomorrow = new Date();
+//             tomorrow.setDate(tomorrow.getDate());
+//             tomorrow.setHours(9);
+//             tomorrow.setMinutes(0);
+
+//             Notifications.scheduleLocalNotificationAsync(createNotification(), {
+//               time: tomorrow,
+//               repeat: "day",
+//             });
+
+//             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+//           }
+//         });
+//       }
+//     });
+// }
+
+//bn3mel feha ashba7
+
 export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
-    .then((data) => {
+    .then(data => {
+      // if (true) {
       if (data === null) {
         Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
-          if (status === "granted") {
-            Notifications.cancelAllScheduledNotificationsAsync();
+          // console.log('got in');
+          // console.log('data', data);
+          if (status === 'granted') {
+            // Notifications.presentLocalNotificationAsync(createNotification());
+            Notifications.createChannelAndroidAsync(CHANNEL_ID, createChannel())
+              .then(val => console.log('channel return:', val))
+              .then(() => {
+                Notifications.cancelAllScheduledNotificationsAsync();
 
-            let tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate());
-            tomorrow.setHours(8);
-            tomorrow.setMinutes(0);
+                const tomorrow = new Date();
+                // 2 minute from now
+                // tomorrow.setTime(tomorrow.getTime() + 2 * 60000);
 
-            Notifications.scheduleLocalNotificationAsync(createNotification(), {
-              time: tomorrow,
-              repeat: "day",
-            });
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(20);
+                tomorrow.setMinutes(0);
 
-            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+                Notifications.scheduleLocalNotificationAsync(
+                  createNotification(),
+                  {
+                    time: tomorrow,
+                    repeat: 'day'
+                  }
+                );
+
+                AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+              })
+              .catch(err => {
+                console.log('err', err);
+              });
           }
         });
       }
     });
 }
+
+
+
+// export function setNotifcation() {
+//   PushNotification.configure({
+//     onNotification: function (notification) {
+//       console.log("NOTIFICATION:", notification);
+
+//       // notification.finish(PushNotificationIOS.FetchResult.NoData);
+//     },
+
+//     onAction: function (notification) {
+//       console.log("ACTION:", notification.action);
+//       console.log("NOTIFICATION:", notification);
+//     },
+
+//     onRegistrationError: function (err) {
+//       console.error(err.message, err);
+//     },
+
+//     popInitialNotification: true,
+
+//     requestPermissions: true,
+//   });
+// }
+
+
+// export function tesPush (){
+//   PushNotification.localNotification({
+  
+//     title: "My Notification Title", // (optional)
+//     message: "My Notification Message", // (required)
+   
+//   });
+// }
+

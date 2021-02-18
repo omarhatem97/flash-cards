@@ -13,6 +13,7 @@ import Result from "./components/Result";
 import Tabs from "./components/Tabs";
 import reducer from "./reducers/index";
 import * as helpers from "./utils/helpers";
+import handleReceiveDecks from "./actions/index";
 
 const store = createStore(reducer, applyMiddleware(thunk));
 const Stack = createStackNavigator();
@@ -30,8 +31,10 @@ const StatusBar = () => {
 
 class App extends Component {
   componentDidMount() {
-    helpers.getDecks();
+    // helpers.resetStorage();
+    // helpers.getDecks();
     helpers.setLocalNotification();
+    console.log("mounted");
   }
 
   render() {
