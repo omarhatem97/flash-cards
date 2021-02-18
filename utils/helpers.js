@@ -81,7 +81,7 @@ export function addCardToDeck(title, card) {
 
 export function clearLocalNotification() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
-    Notifications.cancelAllScheduledNotificationsAsync()
+    Notifications.cancelAllScheduledNotificationsAsync
   );
 }
 
@@ -106,16 +106,17 @@ export function setLocalNotification() {
       console.log(data);
       if (data === null) {
         Notifications.cancelAllScheduledNotificationsAsync();
+
+        let tomorrow = new Date();
+        // 24 hours from now
+        tomorrow = tomorrow.getTime() + 1000 * 60 * 60 * 24;
+        let notificationDate = new Date(tomorrow);
         Notifications.scheduleNotificationAsync({
           content: {
             title: "Please take your daily Quiz!",
             body: "👋 don't forget to take a quiz today!",
           },
-          trigger: {
-            hour: 20,
-            minute: 10,
-            repeats: true,
-          },
+          trigger: notificationDate,
         });
 
         AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));

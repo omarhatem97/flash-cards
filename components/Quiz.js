@@ -56,7 +56,7 @@ class Quiz extends Component {
 
     if (this.state.idx + 1 > content.length - 1) {
       this.resetState();
-      helpers.clearLocalNotification().then(helpers.setLocalNotification());
+      helpers.clearLocalNotification().then(helpers.setLocalNotification);
 
       this.props.navigation.navigate("Result", {
         numCorrect: this.state.numCorrect + 1,
@@ -79,7 +79,7 @@ class Quiz extends Component {
 
     if (this.state.idx + 1 > content.length - 1) {
       this.resetState();
-      helpers.clearLocalNotification().then(helpers.setLocalNotification());
+      helpers.clearLocalNotification().then(helpers.setLocalNotification);
       this.props.navigation.navigate("Result", {
         numCorrect: this.state.numCorrect,
         total: this.props.content.length,
