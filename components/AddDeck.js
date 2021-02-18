@@ -21,11 +21,15 @@ class AddDeck extends Component {
 
   handleSubmit = () => {
     //dispatch save deck title
+    const title = this.state.title;
     if (this.state.title !== "") {
       this.props
-        .dispatch(handleAddDeck(this.state.title))
-        .then(() => alert(`${this.state.title} has been added to the Decks !`))
-        .then(() => this.setState({ title: "" }));
+        .dispatch(handleAddDeck(title))
+        .then(() => alert(`${title} has been added to the Decks !`))
+        .then(() => {
+          this.setState({ title: "" });
+          this.props.navigation.navigate("Deck", { title: title });
+        });
     } else {
       alert("Enter a Deck Title !");
     }

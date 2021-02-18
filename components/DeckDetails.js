@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import * as color from "../utils/colors";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { connect } from "react-redux";
 
 class DeckDetails extends Component {
@@ -33,7 +39,7 @@ class DeckDetails extends Component {
     const { title } = this.props.route.params;
     this.setTitle(title);
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Text style={styles.header}>📜 {title}</Text>
         <Text style={styles.numCards}>{this.props.numCards} cards</Text>
         <View style={styles.buttonContainer}>
@@ -50,7 +56,7 @@ class DeckDetails extends Component {
             <Text style={{ color: color.white }}>Answer Quiz</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

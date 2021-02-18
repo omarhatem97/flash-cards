@@ -81,23 +81,23 @@ export function addCardToDeck(title, card) {
 
 export function clearLocalNotification() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
-    Notifications.cancelAllScheduledNotificationsAsync
+    Notifications.cancelAllScheduledNotificationsAsync()
   );
 }
 
-function createNotification() {
-  return {
-    title: "Take a quiz!",
-    body: "👋 don't forget to take a quiz today!",
+// function createNotification() {
+//   return {
+//     title: "Take a quiz!",
+//     body: "👋 don't forget to take a quiz today!",
 
-    android: {
-      sound: true,
-      priority: "high",
-      sticky: false,
-      vibrate: true,
-    },
-  };
-}
+//     android: {
+//       sound: true,
+//       priority: "high",
+//       sticky: false,
+//       vibrate: true,
+//     },
+//   };
+// }
 
 export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)
@@ -106,20 +106,19 @@ export function setLocalNotification() {
       console.log(data);
       if (data === null) {
         Notifications.cancelAllScheduledNotificationsAsync();
-
-        let tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate());
-        tomorrow.setHours(8);
-        tomorrow.setMinutes(0);
-
-        Notifications.scheduleLocalNotificationAsync(createNotification(), {
-          time: tomorrow,
-          repeat: "day",
+        Notifications.scheduleNotificationAsync({
+          content: {
+            title: "Please take your daily Quiz!",
+            body: "👋 don't forget to take a quiz today!",
+          },
+          trigger: {
+            hour: 20,
+            minute: 10,
+            repeats: true,
+          },
         });
 
         AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
       }
     });
 }
-
-
