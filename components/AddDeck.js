@@ -45,7 +45,7 @@ class AddDeck extends Component {
           />
 
           <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
-            <Text style={styles.submitButtonText}> Submit </Text>
+            <Text style={styles.submitButtonText}> Create Deck </Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
