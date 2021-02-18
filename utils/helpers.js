@@ -2,7 +2,6 @@ import { AsyncStorage } from "react-native";
 import * as Notifications from "expo-notifications";
 import { Permissions } from "expo-permissions";
 
-
 let Decks = {
   React: {
     title: "React",
@@ -100,109 +99,27 @@ function createNotification() {
   };
 }
 
-// export function setLocalNotification() {
-//   AsyncStorage.getItem(NOTIFICATION_KEY)
-//     .then(JSON.parse)
-//     .then((data) => {
-//       if (data === null) {
-//         Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
-//           if (status === "granted") {
-//             Notifications.cancelAllScheduledNotificationsAsync();
-
-//             let tomorrow = new Date();
-//             tomorrow.setDate(tomorrow.getDate());
-//             tomorrow.setHours(9);
-//             tomorrow.setMinutes(0);
-
-//             Notifications.scheduleLocalNotificationAsync(createNotification(), {
-//               time: tomorrow,
-//               repeat: "day",
-//             });
-
-//             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
-//           }
-//         });
-//       }
-//     });
-// }
-
-//bn3mel feha ashba7
-
 export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
-    .then(data => {
-      // if (true) {
+    .then((data) => {
+      console.log(data);
       if (data === null) {
-        Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
-          // console.log('got in');
-          // console.log('data', data);
-          if (status === 'granted') {
-            // Notifications.presentLocalNotificationAsync(createNotification());
-            Notifications.createChannelAndroidAsync(CHANNEL_ID, createChannel())
-              .then(val => console.log('channel return:', val))
-              .then(() => {
-                Notifications.cancelAllScheduledNotificationsAsync();
+        Notifications.cancelAllScheduledNotificationsAsync();
 
-                const tomorrow = new Date();
-                // 2 minute from now
-                // tomorrow.setTime(tomorrow.getTime() + 2 * 60000);
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate());
+        tomorrow.setHours(8);
+        tomorrow.setMinutes(0);
 
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                tomorrow.setHours(20);
-                tomorrow.setMinutes(0);
-
-                Notifications.scheduleLocalNotificationAsync(
-                  createNotification(),
-                  {
-                    time: tomorrow,
-                    repeat: 'day'
-                  }
-                );
-
-                AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
-              })
-              .catch(err => {
-                console.log('err', err);
-              });
-          }
+        Notifications.scheduleLocalNotificationAsync(createNotification(), {
+          time: tomorrow,
+          repeat: "day",
         });
+
+        AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
       }
     });
 }
 
-
-
-// export function setNotifcation() {
-//   PushNotification.configure({
-//     onNotification: function (notification) {
-//       console.log("NOTIFICATION:", notification);
-
-//       // notification.finish(PushNotificationIOS.FetchResult.NoData);
-//     },
-
-//     onAction: function (notification) {
-//       console.log("ACTION:", notification.action);
-//       console.log("NOTIFICATION:", notification);
-//     },
-
-//     onRegistrationError: function (err) {
-//       console.error(err.message, err);
-//     },
-
-//     popInitialNotification: true,
-
-//     requestPermissions: true,
-//   });
-// }
-
-
-// export function tesPush (){
-//   PushNotification.localNotification({
-  
-//     title: "My Notification Title", // (optional)
-//     message: "My Notification Message", // (required)
-   
-//   });
-// }
 
